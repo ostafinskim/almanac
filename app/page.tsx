@@ -14,7 +14,7 @@ export default function Home() {
             The Speedway Almanac is a comprehensive database of speedways and racing events, providing detailed information and statistics for enthusiasts and professionals alike.
           </p>
           <Button asChild className='mt-8 self-center'>
-            <Link href='/dashboard'>Get Started</Link>
+            <Link href='/riders'>Browse details here</Link>
           </Button>
         </div>
       </section>
