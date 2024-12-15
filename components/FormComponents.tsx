@@ -84,17 +84,15 @@ function CustomFormCheckbox<T extends FieldValues>({
       control={control}
       name={name}
       render={({ field }) => (
-        <FormItem className="flex flex-row items-center space-x-3 space-y-0 rounded-md border p-4">
+        <FormItem className='flex items-center'>
           <FormControl>
             <Checkbox
-              className="h-8 w-8" 
+              className='w-10 h-10 bg-white border border-input rounded'
               checked={field.value}
               onCheckedChange={field.onChange}
               />
           </FormControl>
-          <div className="space-y-1 leading-none">
-            <FormLabel>{labelText || name}</FormLabel>
-          </div>
+          <FormLabel className='ml-4'>{labelText || name}</FormLabel>
         </FormItem>
       )}
     ></FormField>
