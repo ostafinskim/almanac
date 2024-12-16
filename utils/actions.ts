@@ -1,7 +1,10 @@
+'use server';
+
 import prisma from "./db";
 import { CreateAndEditRiderType, Rider, riderSchema } from '@/utils/types';
 
 export async function createNewRiderAction(values: CreateAndEditRiderType): Promise<Rider | null> {
+  await new Promise((resolve) => setTimeout(resolve, 1000));
   try {
     riderSchema.parse(values);
     const rider: Rider = await prisma.rider.create({

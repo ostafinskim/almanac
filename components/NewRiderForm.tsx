@@ -6,6 +6,10 @@ import { Button } from '@/components/ui/button';
 import { Form } from '@/components/ui/form';
 import { CreateAndEditRiderType, Nationality, riderSchema } from '@/utils/types';
 import { CustomFormCheckbox, CustomFormField, CustomFormSelect, DateInput } from './FormComponents';
+import { useRouter } from 'next/navigation';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { createNewRiderAction } from '../utils/actions';
+import { useToast } from '../hooks/use-toast';
 
 function NewRiderForm() {
   const form = useForm<CreateAndEditRiderType>({
@@ -25,9 +29,25 @@ function NewRiderForm() {
       nationality: Nationality.POL
     }
   })
+  const queryClient = useQueryClient();
+  const { toast } = useToast();
+  const router = useRouter();
+  const { mutate, isPending } = useMutation({
+    mutationFn: (values: CreateAndEditRiderType) => createNewRiderAction(values),
+    onSuccess: (data) => {
+      if (!data) {
+        toast({ description: 'An error occurred while adding the rider' })
+        return;
+      }
+      toast({ description: 'Rider added successfully' });
+      
+      queryClient.invalidateQueries({ queryKey: ['riders'] });
+      router.push('/riders');
+    }
+  })
 
   function onSubmit(values: CreateAndEditRiderType) {
-    console.log(values);
+    mutate(values);
   }
 
   return (
@@ -48,7 +68,9 @@ function NewRiderForm() {
             <CustomFormCheckbox name='is_wildcard' labelText='Wildcard?' control={form.control} />
             <CustomFormCheckbox name='is_substitute' labelText='Substitute?' control={form.control} />
           </div>
-          <Button type="submit" className="justify-self-start">Add new rider</Button>
+          <Button type='submit' className='justify-self-start' disabled={isPending}>
+            {isPending ? 'loading...' : 'Add new rider'}
+          </Button>
         </div>
       </form>
     </Form>
