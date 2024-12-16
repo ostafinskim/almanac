@@ -1,0 +1,25 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Rider {
+  id            String   @id @default(uuid())
+  first_name    String
+  last_name     String
+  date_of_birth String
+  nationality   String
+  fim_ranking   String
+  number        String
+  is_wildcard   Boolean
+  is_substitute Boolean
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
+}

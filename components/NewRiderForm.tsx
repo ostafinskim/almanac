@@ -4,7 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { Button } from '@/components/ui/button';
 import { Form } from '@/components/ui/form';
-import { CreateAndEditRiderType, Nationality, riderSchema } from '@/lib/types';
+import { CreateAndEditRiderType, Nationality, riderSchema } from '@/utils/types';
 import { CustomFormCheckbox, CustomFormField, CustomFormSelect, DateInput } from './FormComponents';
 
 function NewRiderForm() {

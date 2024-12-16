@@ -10,8 +10,6 @@ export type Rider = {
   number: string;
   is_wildcard: boolean;
   is_substitute: boolean;
-  createdAt: Date;
-  updatedAt: Date;
 }
 
 export enum Nationality {
